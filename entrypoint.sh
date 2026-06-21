@@ -55,10 +55,4 @@ EOF
 
 echo "[entrypoint] config.toml written (llm=openai, base=${OPENAI_BASE_URL}, model=${OPENAI_MODEL})"
 
-exec streamlit run ./webui/Main.py \
-  --server.port "${PORT:-8501}" \
-  --server.address 0.0.0.0 \
-  --server.headless true \
-  --server.enableCORS false \
-  --server.enableXsrfProtection false \
-  --browser.gatherUsageStats false
+exec uvicorn app.asgi:app --host 0.0.0.0 --port $PORT
